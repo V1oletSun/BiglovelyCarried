@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>天津市各区房价分析</title>
+    <link rel="stylesheet" href="res/style.css">
+    <script src="js/echarts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="js/wordcloud.js"></script>
+    <script src="static/tianjin.json"></script>
+</head>
+<body dg-chart-auto-resize="true"
+      dg-chart-options="{title:{show:false},legend:{top:0},grid:{top:25}}"
+      dg-chart-theme="{color:'#F0F0F0',actualBackgroundColor:'#0c1c2e'}">
+    <div class="main">
+        <div class="head">
+            <div class="title">天津市各区房价分析</div>
+        </div>
+        
+        <div class="content-1">
+            <div class="panel">
+                <div class="p-title">天津各区县在售房子数量</div>
+                <div class="p-content">
+                    <div class="chart" id="bar-chart"></div>
+                </div>
+            </div>
+            
+            <div class="panel">
+                <div class="p-title">天津各区县房价分布</div>
+                <div class="p-content">
+                    <div class="chart" id="heatmap-chart"></div>
+                </div>
+            </div>
+            
+            <div class="panel">
+                <div class="p-title">各户型房子数量分布</div>
+                <div class="p-content">
+                    <div class="chart" id="horizontal-bar-chart"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-2">
+            <div class="panel panel-bg">
+                <div class="p-title">房子面积分布</div>
+                <div class="p-content">
+                    <div class="chart" id="pie-chart"></div>
+                </div>
+            </div>
+            
+            <div class="panel panel-bg">
+                <div class="p-title">装修情况分布</div>
+                <div class="p-content">
+                    <div class="chart" id="decoration-chart"></div>
+                </div>
+            </div>
+            
+            <div class="panel panel-bg">
+                <div class="p-title">热门标签词云</div>
+                <div class="p-content">
+                    <div class="chart" id="wordcloud-chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>
