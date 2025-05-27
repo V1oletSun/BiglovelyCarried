@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // 柱形图：区县在售数量
-    fetch('/api/house-count-by-district')
+    fetch('/house-count-by-district')
         .then(res => res.json())
         .then(data => {
             chartInstances.barCount.setOption({
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 热力图：区县房价
-    fetch('/api/house-price-heatmap')
+    fetch('/house-price-heatmap')
         .then(res => res.json())
         .then(data => {
             echarts.registerMap('tianjin', window.tianjin);
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 横向条形图：户型数量
-    fetch('/api/house-type-count')
+    fetch('/house-type-count')
         .then(res => res.json())
         .then(data => {
             chartInstances.horizontalType.setOption({
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 饼图：装修情况
-    fetch('/api/house-decoration')
+    fetch('/house-decoration')
         .then(res => res.json())
         .then(data => {
             chartInstances.pieDecoration.setOption({
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 南丁格尔玫瑰图：面积分布
-    fetch('/api/house-area-distribution')
+    fetch('/house-area-distribution')
         .then(res => res.json())
         .then(data => {
             chartInstances.roseArea.setOption({
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 折线图：电梯配置
-    fetch('/api/house-elevator-count')
+    fetch('/house-elevator-count')
         .then(res => res.json())
         .then(data => {
             chartInstances.lineElevator.setOption({
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 词云图：房子标签
-    fetch('/api/house-tags')
+    fetch('/house-tags')
         .then(res => res.json())
         .then(data => {
             chartInstances.wordcloud.setOption({

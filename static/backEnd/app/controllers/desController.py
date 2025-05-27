@@ -1,6 +1,6 @@
 from flask import Flask, Blueprint, request, jsonify
 
-from static.backEnd.app.Dao.desDao import gethousecountBydisrict, housePriceHeatmap
+from static.backEnd.app.Dao.desDao import gethousecountBydisrict, housePriceHeatmap, houseareadistribution, housetags
 
 desController = Blueprint('desController', __name__)
 
@@ -14,10 +14,10 @@ def housePrice():
 
 @desController.route('/house-area-distribution')
 def houseAreaDistribution():
-    return 'respond from house-area-distribution'
+    return houseareadistribution()
 
 @desController.route('/house-tags')
 def houseTags():
-    return 'respond from house-tags'
+    return housetags()
 
 

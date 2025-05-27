@@ -1,6 +1,5 @@
-from static.backEnd.app.services.drcorationService import create_decoration_app
-from static.backEnd.app.services.testServices import create_test_app
 from flask_cors import CORS
+from static.backEnd.app.services.testServices import create_test_app
 
 testapp = create_test_app()
 #decorationapp = create_decoration_app()

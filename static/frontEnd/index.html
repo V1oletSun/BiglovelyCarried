@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="res/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>天津房价分析</title>
     <script src="js/echarts.js"></script>
     <script src="js/wordcloud.js"></script>
@@ -76,5 +76,10 @@
             </div>
         </div>
     </div>
+    <script>
+        var myChart = echarts.init(document.getElementById('bar-count'));
+        var option = { /* ... */ };
+        myChart.setOption(option);
+    </script>
 </body>
 </html>

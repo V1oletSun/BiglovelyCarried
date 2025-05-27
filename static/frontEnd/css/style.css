@@ -9,7 +9,7 @@ body{
     margin:0;
     padding:0;
     color: #FFF;
-    background: url(images/bg.jpg);
+    background: url("../images/bg.png") center center fixed;
 }
 .main{
     height:100vh;
@@ -21,7 +21,7 @@ body{
 }
 .head{
     height: 4rem;
-    background: url(images/title.png);
+    background: url("../images/head-bg.png") center center fixed;
     background-size: 100% 100%;
 }
 .head .title{
