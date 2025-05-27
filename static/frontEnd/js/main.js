@@ -88,18 +88,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 词云图：房子标签
-    fetch('http://127.0.0.1:5000/house-tags')
-        .then(res => res.json())
-        .then(data => {
-            chartInstances.wordcloud.setOption({
-                series: [{
-                    type: 'wordCloud',
-                    shape: 'circle',
-                    data: data,
-                    textStyle: { color: () => `rgb(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255})` }
-                }]
-            });
+fetch('http://127.0.0.1:5000/house-tags')
+    .then(res => res.json())
+    .then(data => {
+        // 确保数据格式：[{name: '标签', value: 数量}]
+        const formattedData = data.map(item => ({
+            name: item.tagName, // 假设后端字段为tagName（如：'地铁'）
+            value: item.tagCount // 假设后端字段为tagCount（如：100）
+        }));
+        
+        chartInstances.wordcloud.setOption({
+            series: [{
+                type: 'wordCloud',
+                shape: 'circle',
+                data: formattedData,
+                textStyle: {
+                    normal: {
+                        color: () => `rgb(${Math.random() * 255 | 0}, ${Math.random() * 255 | 0}, ${Math.random() * 255 | 0})`
+                    }
+                }
+            }]
         });
+    });
+       
 
     // 窗口自适应
     window.addEventListener('resize', () => {
