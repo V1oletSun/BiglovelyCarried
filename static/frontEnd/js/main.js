@@ -22,26 +22,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 热力图：区县房价
-   fetch('static/tianjin.json') // 本地地图文件路径
-        .then(res => res.json())
-        .then(geoJson => {
-            echarts.registerMap('tianjin', geoJson);
-            
-            // 后端房价数据请求
-            fetch('http://127.0.0.1:5000/house-price-heatmap')
-                .then(res => res.json())
-                .then(data => {
-                    chartInstances.heatmapPrice.setOption({
-                        series: [{
-                            type: 'map',
-                            map: 'tianjin',
-                            data: data,
-                            visualMap: { min: 0, max: 40000, text: ['高', '低'], realtime: false }
-                        }]
-                    });
+fetch('static/tianjin.json')
+    .then(res => res.json())
+    .then(geoJson => {
+        echarts.registerMap('tianjin', geoJson);
+        
+        fetch('http://127.0.0.1:5000/house-price-heatmap')
+            .then(res => res.json())
+            .then(data => {
+                chartInstances.heatmapPrice.setOption({
+                    series: [{ 
+                        type: 'map', 
+                        map: 'tianjin', 
+                        data: data, // 包含name（区县名）和value（房价）的对象数组
+                        visualMap: { min: 0, max: 40000, text: ['低', '高'] }
+                    }]
                 });
-        })
-        .catch(error => console.error('地图数据加载失败:', error)); // 新增错误处理
+            });
+    });
 
 
     // 横向条形图：户型数量
