@@ -22,27 +22,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 热力图：区县房价
-    // 先请求天津地图数据
-    fetch('static/tianjin.json')
+   fetch('static/tianjin.json') // 本地地图文件路径
         .then(res => res.json())
         .then(geoJson => {
-            // 注册地图
             echarts.registerMap('tianjin', geoJson);
             
-            // 再请求房价数据
+            // 后端房价数据请求
             fetch('http://127.0.0.1:5000/house-price-heatmap')
                 .then(res => res.json())
                 .then(data => {
                     chartInstances.heatmapPrice.setOption({
-                        series: [{ 
-                            type: 'map', 
-                            map: 'tianjin', 
-                            data: data, 
-                            visualMap: { min: 0, max: 40000 } 
+                        series: [{
+                            type: 'map',
+                            map: 'tianjin',
+                            data: data,
+                            visualMap: { min: 0, max: 40000, text: ['高', '低'], realtime: false }
                         }]
                     });
                 });
-        });
+        })
+        .catch(error => console.error('地图数据加载失败:', error)); // 新增错误处理
+
 
     // 横向条形图：户型数量
     fetch('http://127.0.0.1:5000/house-type-count')
