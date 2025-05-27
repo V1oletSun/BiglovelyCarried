@@ -14,10 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('http://127.0.0.1:5000/house-count-by-district')
         .then(res => res.json())
         .then(data => {
+            const xData = data.map(item => item.site[0]); // 提取区县名（数组第一项）
+            const yData = data.map(item => item.count); // 提取数量
             chartInstances.barCount.setOption({
-                xAxis: { data: data.site, axisLabel: { rotate: 45 } },
+                xAxis: { data: xData, axisLabel: { rotate: 45 } },
                 yAxis: {},
-                series: [{ type: 'bar', data: data.count, itemStyle: { color: '#ff9999' } }]
+                series: [{ type: 'bar', data: yData, itemStyle: { color: '#ff9999' } }]
             });
         });
 
@@ -26,16 +28,19 @@ fetch('static/tianjin.json')
     .then(res => res.json())
     .then(geoJson => {
         echarts.registerMap('tianjin', geoJson);
-        
         fetch('http://127.0.0.1:5000/house-price-heatmap')
             .then(res => res.json())
             .then(data => {
+                const formatted = data.map(item => ({
+                    name: item.site[0], // 区县名（数组第一项）
+                    value: Number(item.price) // 价格转数值
+                }));
                 chartInstances.heatmapPrice.setOption({
                     series: [{ 
                         type: 'map', 
                         map: 'tianjin', 
-                        data: data, // 包含name（区县名）和value（房价）的对象数组
-                        visualMap: { min: 0, max: 40000, text: ['低', '高'] }
+                        data: formatted, 
+                        visualMap: { min: 0, max: 40000 } 
                     }]
                 });
             });
@@ -46,10 +51,12 @@ fetch('static/tianjin.json')
     fetch('http://127.0.0.1:5000/house-type-count')
         .then(res => res.json())
         .then(data => {
+            const yData = data.map(item => item.layout[0]); // 户型（数组第一项）
+            const xData = data.map(item => item.count); // 数量
             chartInstances.horizontalType.setOption({
                 xAxis: { type: 'value' },
-                yAxis: { data: data.layout },
-                series: [{ type: 'bar', data: data.count, label: { position: 'right' } }]
+                yAxis: { data: yData },
+                series: [{ type: 'bar', data: xData, label: { position: 'right' } }]
             });
         });
 
@@ -57,8 +64,12 @@ fetch('static/tianjin.json')
     fetch('http://127.0.0.1:5000/house-decoration')
         .then(res => res.json())
         .then(data => {
+            const pieData = data.map(item => ({
+                name: item.type[0], // 装修类型（数组第一项）
+                value: item.amount // 数量
+            }));
             chartInstances.pieDecoration.setOption({
-                series: [{ type: 'pie', data: data, radius: '60%', itemStyle: { colors: ['#ff9999', '#66ccff', '#99ff99', '#ffcc66'] } }]
+                series: [{ type: 'pie', data: pieData, radius: '60%' }]
             });
         });
 
@@ -66,8 +77,12 @@ fetch('static/tianjin.json')
     fetch('http://127.0.0.1:5000/house-area-distribution')
         .then(res => res.json())
         .then(data => {
+            const roseData = data.map(item => ({
+                name: item.site[0], // 面积区间（数组第一项，需实际字段）
+                value: item.count // 数量（需实际字段）
+            }));
             chartInstances.roseArea.setOption({
-                series: [{ type: 'pie', data: data, radius: ['30%', '75%'], roseType: 'radius', itemStyle: { colors: ['#ff9999', '#66ccff', '#99ff99', '#ffcc66', '#cc99ff'] } }]
+                series: [{ type: 'pie', data: roseData, roseType: 'radius' }]
             });
         });
 
@@ -75,13 +90,20 @@ fetch('static/tianjin.json')
     fetch('http://127.0.0.1:5000/house-elevator-count')
         .then(res => res.json())
         .then(data => {
+            const xData = data.map(item => item.districts); // 区县
+            const seriesData = [
+                { name: '有电梯', data: data.map(item => item.with_elv) },
+                { name: '无电梯', data: data.map(item => item.without_elv) }
+            ];
             chartInstances.lineElevator.setOption({
-                xAxis: { data: data.districts },
+                xAxis: { data: xData },
                 yAxis: {},
-                series: [
-                    { name: '有电梯', type: 'line', data: data.with_elv, itemStyle: { color: '#66ccff' } },
-                    { name: '无电梯', type: 'line', data: data.without_elv, itemStyle: { color: '#ff9999' } }
-                ]
+                series: seriesData.map(series => ({
+                    type: 'line',
+                    name: series.name,
+                    data: series.data,
+                    itemStyle: { color: series.name === '有电梯' ? '#66ccff' : '#ff9999' }
+                }))
             });
         });
 
@@ -89,22 +111,16 @@ fetch('static/tianjin.json')
 fetch('http://127.0.0.1:5000/house-tags')
     .then(res => res.json())
     .then(data => {
-        // 确保数据格式：[{name: '标签', value: 数量}]
-        const formattedData = data.map(item => ({
-            name: item.tagName, // 假设后端字段为tagName（如：'地铁'）
-            value: item.tagCount // 假设后端字段为tagCount（如：100）
+        const wordData = data.map(item => ({
+            name: item.feature[0], // 标签（数组第一项）
+            value: item.count // 数量
         }));
-        
         chartInstances.wordcloud.setOption({
             series: [{
                 type: 'wordCloud',
                 shape: 'circle',
-                data: formattedData,
-                textStyle: {
-                    normal: {
-                        color: () => `rgb(${Math.random() * 255 | 0}, ${Math.random() * 255 | 0}, ${Math.random() * 255 | 0})`
-                    }
-                }
+                data: wordData,
+                textStyle: { color: () => `rgb(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255})` }
             }]
         });
     });
@@ -114,4 +130,4 @@ fetch('http://127.0.0.1:5000/house-tags')
     window.addEventListener('resize', () => {
         Object.values(chartInstances).forEach(chart => chart.resize());
     });
-});
+});	
