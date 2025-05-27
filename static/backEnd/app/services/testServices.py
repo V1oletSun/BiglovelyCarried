@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_cors import CORS
 
@@ -8,7 +10,10 @@ from static.backEnd.app.controllers.layoutConrtoller import layoutController
 from static.backEnd.app.controllers.testController import testController
 
 def create_test_app():
-    app = Flask(__name__)
+    app = Flask(
+        __name__,
+        template_folder=os.path.abspath(os.path.join(os.path.dirname(__file__), '../../frontEnd'))
+    )
     app.register_blueprint(testController)
     app.register_blueprint(decorationController)
     app.register_blueprint(layoutController)
