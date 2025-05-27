@@ -6,12 +6,17 @@
     <title>天津房价分析</title>
     <!-- 引入最新 ECharts 和词云扩展 -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-     <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.0.0/dist/echarts-wordcloud.min.js"></script>
-     <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.0.0/dist/echarts-wordcloud.min.js"></script>
+    <script src="js/main.js"></script>
 </head>
 <body dg-chart-auto-resize="true"
-      dg-chart-options="{title:{show:false},legend:{top:0},grid:{top:25}}"
-      dg-chart-theme="{color:'#F0F0F0',actualBackgroundColor:'#0d1e5c'}">
+      dg-chart-options="{
+          title: { show: false },
+          legend: { top: '5%', textStyle: { fontSize: 12 } },
+          grid: { top: '15%', bottom: '10%', left: '5%', right: '5%' },
+          tooltip: { fontSize: 12 }
+      }"
+      dg-chart-theme="{ color: '#F0F0F0', actualBackgroundColor: '#0d1e5c' }">
     <div class="main">
         <div class="head">
             <div class="title">天津房价分析</div>
@@ -77,10 +82,5 @@
             </div>
         </div>
     </div>
-    <script>
-        var myChart = echarts.init(document.getElementById('bar-count'));
-        var option = { /* ... */ };
-        myChart.setOption(option);
-    </script>
 </body>
 </html>
