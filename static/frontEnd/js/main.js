@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 热力图：区县房价
-fetch('static/tianjin.json')
+fetch('http://127.0.0.1:5000/tianjin.json')
     .then(res => res.json())
     .then(geoJson => {
         echarts.registerMap('tianjin', geoJson);
