@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // 柱形图：区县在售数量
-    fetch('http://localhost:5000/api/house-count-by-district')
+    fetch('http://127.0.0.1:5000/house-count-by-district')
         .then(res => res.json())
         .then(data => {
             chartInstances.barCount.setOption({
@@ -23,14 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 热力图：区县房价
     // 先请求天津地图数据
-    fetch('http://localhost:5000/api/tianjin-map')
+    fetch('static/tianjin.json')
         .then(res => res.json())
         .then(geoJson => {
             // 注册地图
             echarts.registerMap('tianjin', geoJson);
             
             // 再请求房价数据
-            fetch('http://localhost:5000/api/house-price-heatmap')
+            fetch('http://127.0.0.1:5000/house-price-heatmap')
                 .then(res => res.json())
                 .then(data => {
                     chartInstances.heatmapPrice.setOption({
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 横向条形图：户型数量
-    fetch('http://localhost:5000/api/house-type-count')
+    fetch('http://127.0.0.1:5000/house-type-count')
         .then(res => res.json())
         .then(data => {
             chartInstances.horizontalType.setOption({
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 饼图：装修情况
-    fetch('http://localhost:5000/api/house-decoration')
+    fetch('http://127.0.0.1:5000/house-decoration')
         .then(res => res.json())
         .then(data => {
             chartInstances.pieDecoration.setOption({
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 南丁格尔玫瑰图：面积分布
-    fetch('http://localhost:5000/api/house-area-distribution')
+    fetch('http://127.0.0.1:5000/house-area-distribution')
         .then(res => res.json())
         .then(data => {
             chartInstances.roseArea.setOption({
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 折线图：电梯配置
-    fetch('http://localhost:5000/api/house-elevator-count')
+    fetch('http://127.0.0.1:5000/house-elevator-count')
         .then(res => res.json())
         .then(data => {
             chartInstances.lineElevator.setOption({
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 词云图：房子标签
-    fetch('http://localhost:5000/api/house-tags')
+    fetch('http://127.0.0.1:5000/house-tags')
         .then(res => res.json())
         .then(data => {
             chartInstances.wordcloud.setOption({

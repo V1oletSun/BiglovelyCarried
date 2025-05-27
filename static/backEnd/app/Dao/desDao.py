@@ -1,31 +1,34 @@
+from static.backEnd.app.model.desModel import Des, HouseCountByDistrict, PriceHeatmap, Areadistribution, features
 from static.backEnd.app.util import dbhelper
 from flask import Flask, jsonify
 
-def gethousecountBydisrict():
-    sql = 'select site,count(*) from house_des group by site'
+def gethousecountBydistrict():
+    sql = 'select site,count(*) as count from house_des group by site'
     result = dbhelper.executeQuery(sql,None)
-    print(result)
-    return jsonify(result)
+    houseCountByDistrict = [HouseCountByDistrict(*row) for row in result]
+    des_dict = [des.__dict__ for des in houseCountByDistrict]
+    return des_dict
 
 def housePriceHeatmap():
-    sql = 'select site,avg(price) from house_des group by site'
+    sql = 'select site,avg(price) as price from house_des group by site'
     result = dbhelper.executeQuery(sql,None)
-    print(result)
-    return jsonify(result)
+    priceHeatmap = [PriceHeatmap(*row) for row in result]
+    priceHeatmap_dict = [priceHeatmap.__dict__ for priceHeatmap in priceHeatmap]
+    return priceHeatmap_dict
 
 def houseareadistribution():
-    sql = 'select site,count(*) from house_des group by site'
+    sql = 'select site,count(*) as count from house_des group by site'
     result = dbhelper.executeQuery(sql,None)
-    print(result)
-    return jsonify(result)
+    areadistribution = [Areadistribution(*row) for row in result]
+    areadistribution_dict = [areadistribution.__dict__ for areadistribution in areadistribution]
+    return areadistribution_dict
 
 def housetags():
-    sql = 'select feature1,count(*) from house_des group by feature1'
+    sql = 'select feature1,count(*) as count from house_des group by feature1'
     result1 = dbhelper.executeQuery(sql,None)
-    sql = 'select feature2,count(*) from house_des group by feature2'
+    sql = 'select feature2,count(*) as count from house_des group by feature2'
     result2 = dbhelper.executeQuery(sql,None)
     result = result1+result2
-    print(result1)
-    print(result2)
-    print(result)
-    return jsonify(result)
+    feature = [features(*row) for row in result]
+    feature_dict = [feature.__dict__ for feature in feature]
+    return feature_dict
