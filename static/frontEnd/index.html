@@ -2,82 +2,72 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <title>天津房价分析</title>
-    <!-- 引入最新 ECharts 和词云扩展 -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.0.0/dist/echarts-wordcloud.min.js"></script>
     <script src="js/main.js"></script>
 </head>
-<body dg-chart-auto-resize="true"
-      dg-chart-options="{
-          title: { show: false },
-          legend: { top: '5%', textStyle: { fontSize: 12 } },
-          grid: { top: '15%', bottom: '10%', left: '5%', right: '5%' },
-          tooltip: { fontSize: 12 }
-      }"
-      dg-chart-theme="{ color: '#F0F0F0', actualBackgroundColor: '#0d1e5c' }">
+<body>
     <div class="main">
         <div class="head">
-            <div class="title">天津房价分析</div>
+            <div class="title">天津房价分析可视化平台</div>
         </div>
         <div class="content">
-            <!-- 左侧内容区 -->
-            <div class="content-left">
-                <!-- 柱形图：区县在售数量 -->
-                <div class="panel">
-                    <div class="p-title">天津各区县在售房子数量</div>
-                    <div class="p-content">
-                        <div class="chart" id="bar-count"></div>
-                    </div>
-                </div>
-                <!-- 横向条形图：户型数量 -->
-                <div class="panel">
-                    <div class="p-title">各户型房子数量分布</div>
-                    <div class="p-content">
-                        <div class="chart" id="horizontal-type"></div>
-                    </div>
-                </div>
-                <!-- 折线图：电梯配置 -->
-                <div class="panel">
-                    <div class="p-title">天津各区电梯配置情况</div>
-                    <div class="p-content">
-                        <div class="chart" id="line-elevator"></div>
-                    </div>
+            <!-- 区县在售数量 -->
+            <div class="panel">
+                <div class="p-title">天津各区县在售房源数量统计</div>
+                <div class="p-content">
+                    <div class="chart" id="bar-count" style="height:400px"></div>
                 </div>
             </div>
-            <!-- 中间内容区 -->
-            <div class="content-center">
-                <!-- 热力图：区县房价 -->
-                <div class="panel">
-                    <div class="p-title">天津各区县房价分布</div>
-                    <div class="p-content">
-                        <div class="chart" id="heatmap-price"></div>
-                    </div>
-                </div>
-                <!-- 南丁格尔玫瑰图：面积分布 -->
-                <div class="panel">
-                    <div class="p-title">房子面积分布</div>
-                    <div class="p-content">
-                        <div class="chart" id="rose-area"></div>
-                    </div>
+
+            <!-- 热力图 -->
+            <div class="panel">
+                <div class="p-title">天津各区县房价分布热力图</div>
+                <div class="p-content">
+                    <div class="chart" id="heatmap-price" style="height:600px"></div>
                 </div>
             </div>
-            <!-- 右侧内容区 -->
-            <div class="content-right">
-                <!-- 饼图：装修情况 -->
-                <div class="panel">
-                    <div class="p-title">房屋装修情况分布</div>
-                    <div class="p-content">
-                        <div class="chart" id="pie-decoration"></div>
-                    </div>
+
+            <!-- 户型分布 -->
+            <div class="panel">
+                <div class="p-title">主要户型数量分布统计</div>
+                <div class="p-content">
+                    <div class="chart" id="horizontal-type" style="height:400px"></div>
                 </div>
-                <!-- 词云图：房子标签 -->
-                <div class="panel">
-                    <div class="p-title">房子标签词云图</div>
-                    <div class="p-content">
-                        <div class="chart" id="wordcloud-chart"></div>
-                    </div>
+            </div>
+
+            <!-- 装修情况 -->
+            <div class="panel">
+                <div class="p-title">房屋装修类型占比分析</div>
+                <div class="p-content">
+                    <div class="chart" id="pie-decoration" style="height:400px"></div>
+                </div>
+            </div>
+
+            <!-- 面积分布 -->
+            <div class="panel">
+                <div class="p-title">房屋面积区间分布玫瑰图</div>
+                <div class="p-content">
+                    <div class="chart" id="rose-area" style="height:450px"></div>
+                </div>
+            </div>
+
+            <!-- 电梯配置 -->
+            <div class="panel">
+                <div class="p-title">各区电梯配置比例趋势分析</div>
+                <div class="p-content">
+                    <div class="chart" id="line-elevator" style="height:400px"></div>
+                </div>
+            </div>
+
+            <!-- 词云 -->
+            <div class="panel">
+                <div class="p-title">房源特征标签词云展示</div>
+                <div class="p-content">
+                    <div class="chart" id="wordcloud-chart" style="height:450px"></div>
                 </div>
             </div>
         </div>

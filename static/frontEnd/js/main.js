@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const xData = data.map(item => item.site[0]); // 提取区县名（数组第一项）
             const yData = data.map(item => item.count); // 提取数量
             chartInstances.barCount.setOption({
-                xAxis: { data: xData, axisLabel: { rotate: 45 } },
+                xAxis: { data: xData, axisLabel: { rotate: 45 , interval: 0} },
                 yAxis: {},
                 series: [{ type: 'bar', data: yData, itemStyle: { color: '#ff9999' } }]
             });
