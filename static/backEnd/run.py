@@ -1,6 +1,11 @@
-from static.backEnd.app.services.testServices import create_apps
+from static.backEnd.app.services.drcorationService import create_decoration_app
+from static.backEnd.app.services.testServices import create_test_app
+from flask_cors import CORS
 
-app = create_apps()
+testapp = create_test_app()
+#decorationapp = create_decoration_app()
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    CORS(testapp)
+    testapp.run(debug=True)
+    #decorationapp.run(debug=True)

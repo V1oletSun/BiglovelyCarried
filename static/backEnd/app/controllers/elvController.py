@@ -1,7 +1,9 @@
 from flask import Flask, Blueprint, request, jsonify
 
+from static.backEnd.app.Dao.elvDao import getelv
+
 elvController = Blueprint('elvController', __name__)
 
-@elvController.route('/api/house-elevator-count', methods=['POST'])
+@elvController.route('/house-elevator-count')
 def elv():
-    return 'respond from elvController'
+    return getelv()
