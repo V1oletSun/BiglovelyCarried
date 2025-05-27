@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(res => res.json())
         .then(data => {
             chartInstances.barCount.setOption({
-                xAxis: { data: data.districts, axisLabel: { rotate: 45 } },
+                xAxis: { data: data.site, axisLabel: { rotate: 45 } },
                 yAxis: {},
-                series: [{ type: 'bar', data: data.counts, itemStyle: { color: '#ff9999' } }]
+                series: [{ type: 'bar', data: data.count, itemStyle: { color: '#ff9999' } }]
             });
         });
 
@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             chartInstances.horizontalType.setOption({
                 xAxis: { type: 'value' },
-                yAxis: { data: data.types },
-                series: [{ type: 'bar', data: data.counts, label: { position: 'right' } }]
+                yAxis: { data: data.layout },
+                series: [{ type: 'bar', data: data.count, label: { position: 'right' } }]
             });
         });
 
@@ -81,8 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 xAxis: { data: data.districts },
                 yAxis: {},
                 series: [
-                    { name: '有电梯', type: 'line', data: data.elevator, itemStyle: { color: '#66ccff' } },
-                    { name: '无电梯', type: 'line', data: data.noElevator, itemStyle: { color: '#ff9999' } }
+                    { name: '有电梯', type: 'line', data: data.with_elv, itemStyle: { color: '#66ccff' } },
+                    { name: '无电梯', type: 'line', data: data.without_elv, itemStyle: { color: '#ff9999' } }
                 ]
             });
         });
