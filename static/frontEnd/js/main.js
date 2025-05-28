@@ -510,7 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     emphasis: {
                         textStyle: {
-                            shadowBlur: 10,
+                            shadowBlur: 500,
                             shadowColor: '#333'
                         }
                     },
