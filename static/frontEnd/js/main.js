@@ -520,7 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 窗口自适应
-    window.addEventListener('resize', () => {
-        Object.values(chartInstances).forEach(chart => chart.resize());
-    });
+//    window.addEventListener('resize', () => {
+//        Object.values(chartInstances).forEach(chart => chart.resize());
+//    });
 });
