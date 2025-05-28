@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
         wordcloud: echarts.init(document.getElementById('wordcloud-chart'))
     };
 
-    // 非词云图字体样式（微软雅黑，浅灰色）
     const commonFontStyle = {
         fontFamily: 'Microsoft YaHei',
         color: '#F0F0F0'
@@ -37,21 +36,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: {
                     text: '区县在售房屋数量统计',
                     subtext: '按区域划分的房屋总数',
-                    textStyle: commonFontStyle // 应用公共字体样式
+                    textStyle: commonFontStyle
                 },
                 tooltip: {
                     trigger: 'axis',
-                    axisPointer: { type: 'shadow' },
+                    axisPointer: {
+                        type: 'shadow'
+                    },
                     formatter: function(params) {
                         return `${params[0].name}: ${formatNumber(params[0].value)} 套`;
-                    },
-                    textStyle: commonFontStyle // Tooltip 字体
+                    }
                 },
                 legend: {
                     data: ['房屋数量'],
                     top: '5%',
-                    left: 'right',
-                    textStyle: commonFontStyle // 图例字体
+                    left: 'right'
                 },
                 toolbox: {
                     show: true,
@@ -68,8 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     data: xData,
                     axisLabel: {
                         rotate: 45,
-                        interval: 0,
-                        ...commonFontStyle // 坐标轴标签字体
+                        interval: 0
                     }
                 },
                 yAxis: {
@@ -78,8 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     axisLabel: {
                         formatter: function(value) {
                             return formatNumber(value);
-                        },
-                        ...commonFontStyle // 坐标轴标签字体
+                        }
                     }
                 },
                 series: [{
@@ -87,15 +84,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     type: 'bar',
                     data: yData,
                     itemStyle: { color: '#ff9999' },
-                    markPoint: { data: [{ type: 'max', name: '最大值' }, { type: 'min', name: '最小值' }] },
-                    markLine: { data: [{ type: 'average', name: '平均值' }] },
+                    markPoint: {
+                        data: [
+                            { type: 'max', name: '最大值' },
+                            { type: 'min', name: '最小值' }
+                        ]
+                    },
+                    markLine: {
+                        data: [
+                            { type: 'average', name: '平均值' }
+                        ]
+                    },
                     label: {
                         show: true,
                         position: 'top',
                         formatter: function(params) {
                             return formatNumber(params.value);
-                        },
-                        ...commonFontStyle // 柱形图标签字体
+                        }
                     }
                 }]
             });
@@ -124,8 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             trigger: 'item',
                             formatter: function(params) {
                                 return `${params.name}: ${formatNumber(params.value)} 元/㎡`;
-                            },
-                            textStyle: commonFontStyle
+                            }
                         },
                         visualMap: {
                             min: 0,
@@ -133,8 +137,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             text: ['高', '低'],
                             realtime: false,
                             calculable: true,
-                            inRange: { color: ['#e0ecff', '#bfd3e6', '#9ebcda', '#8c96c6', '#8c6bb1', '#88419d', '#6e016b'] },
-                            textStyle: commonFontStyle // 视觉映射文字字体
+                            inRange: {
+                                color: ['#e0ecff', '#bfd3e6', '#9ebcda', '#8c96c6', '#8c6bb1', '#88419d', '#6e016b']
+                            }
                         },
                         toolbox: {
                             show: true,
@@ -150,10 +155,13 @@ document.addEventListener('DOMContentLoaded', () => {
                             map: 'tianjin',
                             data: formatted,
                             label: {
-                                show: true,
-                                ...commonFontStyle // 地图标签字体
+                                show: true
                             },
-                            itemStyle: { emphasis: { areaColor: '#99ccff' } }
+                            itemStyle: {
+                                emphasis: {
+                                    areaColor: '#99ccff'
+                                }
+                            }
                         }]
                     });
                 });
@@ -174,17 +182,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 tooltip: {
                     trigger: 'axis',
-                    axisPointer: { type: 'shadow' },
+                    axisPointer: {
+                        type: 'shadow'
+                    },
                     formatter: function(params) {
                         return `${params.name}: ${formatNumber(params[0].value)} 套`;
-                    },
-                    textStyle: commonFontStyle
+                    }
                 },
                 legend: {
                     data: ['数量'],
                     top: '5%',
-                    left: 'right',
-                    textStyle: commonFontStyle
+                    left: 'right'
                 },
                 toolbox: {
                     show: true,
@@ -202,16 +210,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     axisLabel: {
                         formatter: function(value) {
                             return formatNumber(value);
-                        },
-                        ...commonFontStyle
+                        }
                     }
                 },
                 yAxis: {
                     type: 'category',
-                    data: yData,
-                    axisLabel: {
-                        ...commonFontStyle // 纵向坐标轴标签字体
-                    }
+                    data: yData
                 },
                 series: [{
                     name: '数量',
@@ -223,8 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         position: 'right',
                         formatter: function(params) {
                             return formatNumber(params.value);
-                        },
-                        ...commonFontStyle // 条形图标签字体
+                        }
                     }
                 }]
             });
@@ -239,6 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 value: item.amount // 数量
             }));
 
+            // 计算总量
             const total = pieData.reduce((sum, item) => sum + item.value, 0);
 
             chartInstances.pieDecoration.setOption({
@@ -251,8 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     trigger: 'item',
                     formatter: function(params) {
                         return `${params.name}: ${formatNumber(params.value)} 套 (${calculatePercentage(params.value, total)}%)`;
-                    },
-                    textStyle: commonFontStyle
+                    }
                 },
                 legend: {
                     type: 'scroll',
@@ -260,8 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     right: 10,
                     top: 20,
                     bottom: 20,
-                    data: pieData.map(item => item.name),
-                    textStyle: commonFontStyle // 滚动图例字体
+                    data: pieData.map(item => item.name)
                 },
                 toolbox: {
                     show: true,
@@ -279,18 +281,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     avoidLabelOverlap: false,
                     label: {
                         show: true,
-                        formatter: '{b}: {c} ({d}%)',
-                        ...commonFontStyle // 饼图标签字体
+                        formatter: '{b}: {c} ({d}%)'
                     },
                     emphasis: {
                         label: {
                             show: true,
                             fontSize: '15',
-                            fontWeight: 'bold',
-                            ...commonFontStyle // 高亮标签字体
+                            fontWeight: 'bold'
                         }
                     },
-                    labelLine: { show: true }
+                    labelLine: {
+                        show: true
+                    },
+                    data: pieData
                 }]
             });
         });
@@ -304,6 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 value: item.count // 数量
             }));
 
+            // 计算总量
             const total = roseData.reduce((sum, item) => sum + item.value, 0);
 
             chartInstances.roseArea.setOption({
@@ -316,8 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     trigger: 'item',
                     formatter: function(params) {
                         return `${params.name}: ${formatNumber(params.value)} 套 (${calculatePercentage(params.value, total)}%)`;
-                    },
-                    textStyle: commonFontStyle
+                    }
                 },
                 legend: {
                     type: 'scroll',
@@ -325,8 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     right: 10,
                     top: 20,
                     bottom: 20,
-                    data: roseData.map(item => item.name),
-                    textStyle: commonFontStyle
+                    data: roseData.map(item => item.name)
                 },
                 toolbox: {
                     show: true,
@@ -345,18 +347,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     data: roseData,
                     label: {
                         show: true,
-                        formatter: '{b}: {c} ({d}%)',
-                        ...commonFontStyle
+                        formatter: '{b}: {c} ({d}%)'
                     },
                     emphasis: {
                         label: {
                             show: true,
                             fontSize: '15',
-                            fontWeight: 'bold',
-                            ...commonFontStyle
+                            fontWeight: 'bold'
                         }
                     },
-                    labelLine: { show: true, length: 10, length2: 20 }
+                    labelLine: {
+                        show: true,
+                        length: 10,
+                        length2: 20
+                    }
                 }]
             });
         });
@@ -379,21 +383,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 tooltip: {
                     trigger: 'axis',
-                    axisPointer: { type: 'cross', crossStyle: { color: '#999' } },
+                    axisPointer: {
+                        type: 'cross',
+                        crossStyle: {
+                            color: '#999'
+                        }
+                    },
                     formatter: function(params) {
                         let result = `${params[0].name}<br/>`;
                         params.forEach(item => {
                             result += `${item.seriesName}: ${formatNumber(item.value)} 套<br/>`;
                         });
                         return result;
-                    },
-                    textStyle: commonFontStyle
+                    }
                 },
                 legend: {
                     data: ['有电梯', '无电梯'],
                     top: '5%',
-                    left: 'right',
-                    textStyle: commonFontStyle
+                    left: 'right'
                 },
                 toolbox: {
                     show: true,
@@ -410,8 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     data: xData,
                     axisLabel: {
                         rotate: 45,
-                        interval: 0,
-                        ...commonFontStyle
+                        interval: 0
                     }
                 },
                 yAxis: {
@@ -420,30 +426,39 @@ document.addEventListener('DOMContentLoaded', () => {
                     axisLabel: {
                         formatter: function(value) {
                             return formatNumber(value);
-                        },
-                        ...commonFontStyle
+                        }
                     }
                 },
                 series: seriesData.map(series => ({
                     name: series.name,
                     type: 'line',
                     data: series.data,
-                    itemStyle: { color: series.name === '有电梯' ? '#66ccff' : '#ff9999' },
-                    markPoint: { data: [{ type: 'max', name: '最大值' }, { type: 'min', name: '最小值' }] },
-                    markLine: { data: [{ type: 'average', name: '平均值' }] },
+                    itemStyle: {
+                        color: series.name === '有电梯' ? '#66ccff' : '#ff9999'
+                    },
+                    markPoint: {
+                        data: [
+                            { type: 'max', name: '最大值' },
+                            { type: 'min', name: '最小值' }
+                        ]
+                    },
+                    markLine: {
+                        data: [
+                            { type: 'average', name: '平均值' }
+                        ]
+                    },
                     label: {
                         show: true,
                         position: 'top',
                         formatter: function(params) {
                             return formatNumber(params.value);
-                        },
-                        ...commonFontStyle // 折线图标签字体
+                        }
                     }
                 }))
             });
         });
 
-    // 词云图：房子标签（保持原有字体样式，不修改）
+    // 词云图：房子标签
     fetch('http://127.0.0.1:5000/house-tags')
         .then(res => res.json())
         .then(data => {
@@ -455,14 +470,13 @@ document.addEventListener('DOMContentLoaded', () => {
             chartInstances.wordcloud.setOption({
                 title: {
                     text: '热门房屋标签统计',
-                    subtext: '出现频率最高的房屋特征'
-                    // 不设置 textStyle，保持默认或原有样式
+                    subtext: '出现频率最高的房屋特征',
+                    textStyle: commonFontStyle
                 },
                 tooltip: {
                     show: true,
                     formatter: function(params) {
-                        return `${params.data.name}: ${formatNumber(params.data.value)} 次`
-                        // 不设置 textStyle，保持默认或原有样式
+                        return `${params.data.name}: ${formatNumber(params.data.value)} 次`;
                     }
                 },
                 toolbox: {
@@ -483,9 +497,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     gridSize: 8,
                     drawOutOfBound: false,
                     textStyle: {
-                        fontFamily: 'sans-serif', // 保持原有字体
+                        fontFamily: 'sans-serif',
                         fontWeight: 'bold',
-                        color: function() { // 保持随机颜色
+                        color: function() {
                             return 'rgb(' + [
                                 Math.round(Math.random() * 160),
                                 Math.round(Math.random() * 160),
@@ -497,7 +511,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         textStyle: {
                             shadowBlur: 10,
                             shadowColor: '#333'
-                            // 不修改颜色，保持原有逻辑
                         }
                     },
                     data: wordData
