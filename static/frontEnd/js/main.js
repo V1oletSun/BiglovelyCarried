@@ -186,7 +186,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         type: 'shadow'
                     },
                     formatter: function(params) {
-                        return `${params.name}: ${formatNumber(params[0].value)} 套`;
+                        return `${params.name}: ${formatNumber(params.value)} 套`;
+                        //return `${params.name}: ${formatNumber(params[0].value)} 套`;
                     }
                 },
                 legend: {
