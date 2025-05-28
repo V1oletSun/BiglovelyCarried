@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     axisPointer: {
                         type: 'shadow'
                     },
+                    textStyle: commonFontStyle,
                     formatter: function(params) {
                         return `${params[0].name}: ${formatNumber(params[0].value)} 套`;
                     }
@@ -50,7 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 legend: {
                     data: ['房屋数量'],
                     top: '5%',
-                    left: 'right'
+                    left: 'right',
+                    textStyle: commonFontStyle
                 },
                 toolbox: {
                     show: true,
@@ -68,7 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     axisLabel: {
                         rotate: 45,
                         interval: 0
-                    }
+                    },
+                    textStyle: commonFontStyle
                 },
                 yAxis: {
                     type: 'value',
@@ -77,7 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         formatter: function(value) {
                             return formatNumber(value);
                         }
-                    }
+                    },
+                    textStyle: commonFontStyle
                 },
                 series: [{
                     name: '房屋数量',
@@ -185,15 +189,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     axisPointer: {
                         type: 'shadow'
                     },
+                    textStyle: commonFontStyle,
                     formatter: function(params) {
-                        return `${params.name}: ${formatNumber(params.value)} 套`;
-                        //return `${params.name}: ${formatNumber(params[0].value)} 套`;
+                        return `${params.name}: ${formatNumber(params[0].value)} 套`;
                     }
                 },
                 legend: {
                     data: ['数量'],
                     top: '5%',
-                    left: 'right'
+                    left: 'right',
+                    textStyle: commonFontStyle
                 },
                 toolbox: {
                     show: true,
@@ -212,11 +217,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         formatter: function(value) {
                             return formatNumber(value);
                         }
-                    }
+                    },
+                    textStyle: commonFontStyle
                 },
                 yAxis: {
                     type: 'category',
-                    data: yData
+                    data: yData,
+                    textStyle: commonFontStyle
                 },
                 series: [{
                     name: '数量',
@@ -254,6 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 tooltip: {
                     trigger: 'item',
+                    textStyle: commonFontStyle,
                     formatter: function(params) {
                         return `${params.name}: ${formatNumber(params.value)} 套 (${calculatePercentage(params.value, total)}%)`;
                     }
@@ -319,6 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 tooltip: {
                     trigger: 'item',
+                    textStyle: commonFontStyle,
                     formatter: function(params) {
                         return `${params.name}: ${formatNumber(params.value)} 套 (${calculatePercentage(params.value, total)}%)`;
                     }
@@ -388,8 +397,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         type: 'cross',
                         crossStyle: {
                             color: '#999'
-                        }
+                        },
                     },
+                    textStyle: commonFontStyle,
                     formatter: function(params) {
                         let result = `${params[0].name}<br/>`;
                         params.forEach(item => {
@@ -401,7 +411,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 legend: {
                     data: ['有电梯', '无电梯'],
                     top: '5%',
-                    left: 'right'
+                    left: 'right',
+                    textStyle: commonFontStyle
                 },
                 toolbox: {
                     show: true,
@@ -520,7 +531,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // 窗口自适应
-    window.addEventListener('resize', () => {
-        Object.values(chartInstances).forEach(chart => chart.resize());
-    });
+//    window.addEventListener('resize', () => {
+//        Object.values(chartInstances).forEach(chart => chart.resize());
+//    });
 });
