@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('http://127.0.0.1:5000/house-count-by-district')
         .then(res => res.json())
         .then(data => {
-            const xData = data.map(item => item.site[0]); // 提取区县名
+            const xData = data.map(item => item.site); // 提取区县名
             const yData = data.map(item => item.count); // 提取数量
 
             chartInstances.barCount.setOption({
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(res => res.json())
                 .then(data => {
                     const formatted = data.map(item => ({
-                        name: item.site[0], // 区县名
+                        name: item.site, // 区县名
                         value: Number(item.price) // 价格转数值
                     }));
 
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('http://127.0.0.1:5000/house-type-count')
         .then(res => res.json())
         .then(data => {
-            const yData = data.map(item => item.layout[0]); // 户型
+            const yData = data.map(item => item.layout); // 户型
             const xData = data.map(item => item.count); // 数量
 
             chartInstances.horizontalType.setOption({
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         type: 'shadow'
                     },
                     formatter: function(params) {
-                        return `${params[0].name}: ${formatNumber(params[0].value)} 套`;
+                        return `${params.name}: ${formatNumber(params[0].value)} 套`;
                     }
                 },
                 legend: {
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(res => res.json())
         .then(data => {
             const pieData = data.map(item => ({
-                name: item.type[0], // 装修类型
+                name: item.type, // 装修类型
                 value: item.amount // 数量
             }));
 
@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(res => res.json())
         .then(data => {
             const roseData = data.map(item => ({
-                name: item.site[0], // 面积区间
+                name: item.site, // 面积区间
                 value: item.count // 数量
             }));
 
@@ -452,7 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(res => res.json())
         .then(data => {
             const wordData = data.map(item => ({
-                name: item.feature[0], // 标签
+                name: item.feature, // 标签
                 value: item.count // 数量
             }));
 
